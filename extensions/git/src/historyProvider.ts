@@ -671,7 +671,7 @@ export function getHistoryItemHover(authorAvatar: string | undefined, authorName
 			}
 
 			const commandsMarkdown = commands[index]
-				.map(command => `[${command.title}](command:${command.command}?${encodeURIComponent(JSON.stringify(command.arguments))} "${command.tooltip}")`);
+				.map(command => `[${command.title}](command:${command.command}?${JSON.stringify(command.arguments)} "${command.tooltip}")`);
 			markdownString.appendMarkdown(commandsMarkdown.join('&nbsp;'));
 		}
 	}
