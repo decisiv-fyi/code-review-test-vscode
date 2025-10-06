@@ -632,7 +632,7 @@ export function getHistoryItemHover(authorAvatar: string | undefined, authorName
 			const dateString = new Date(authorDate).toLocaleString(undefined, {
 				year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'
 			});
-			markdownString.appendMarkdown(`, $(history) ${fromNow(authorDate, true, true)} (${dateString})`);
+			markdownString.appendMarkdown(`, $(history) ${fromNow(authorDate, true, false)} (${dateString})`);
 		}
 
 		markdownString.appendMarkdown('\n\n');
