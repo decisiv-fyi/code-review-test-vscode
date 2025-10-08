@@ -107,6 +107,8 @@ export class CoreExperimentationService extends Disposable implements ICoreExper
 		const storageKey = `coreExperimentation.${experimentConfig.experimentName}`;
 		const storedExperiment = this.storageService.get(storageKey, StorageScope.APPLICATION);
 		if (storedExperiment) {
+			const parsed = JSON.parse(storedExperiment);
+			Object.assign(this.experiments, parsed);
 			return;
 		}
 
