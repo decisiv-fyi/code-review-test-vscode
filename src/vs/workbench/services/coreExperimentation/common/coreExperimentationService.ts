@@ -93,7 +93,7 @@ export class CoreExperimentationService extends Disposable implements ICoreExper
 
 		const firstSessionDateString = this.storageService.get(firstSessionDateStorageKey, StorageScope.APPLICATION) || new Date().toUTCString();
 		const daysSinceFirstSession = ((+new Date()) - (+new Date(firstSessionDateString))) / 1000 / 60 / 60 / 24;
-		if (daysSinceFirstSession > 1) {
+		if (daysSinceFirstSession >= 1) {
 			// not a startup exp candidate.
 			return;
 		}
@@ -105,9 +105,13 @@ export class CoreExperimentationService extends Disposable implements ICoreExper
 
 		// also check storage to see if this user has already seen the startup experience
 		const storageKey = `coreExperimentation.${experimentConfig.experimentName}`;
-		const storedExperiment = this.storageService.get(storageKey, StorageScope.APPLICATION);
-		if (storedExperiment) {
-			return;
+		try {
+			const storedExperiment = this.storageService.get(storageKey, StorageScope.APPLICATION);
+			if (storedExperiment) {
+				JSON.parse(storedExperiment);
+				return;
+			}
+		} catch (e) {
 		}
 
 		const experiment = this.createStartupExperiment(experimentConfig.experimentName, experimentConfig);
