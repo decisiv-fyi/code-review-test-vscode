@@ -144,7 +144,7 @@ export class CoreExperimentationService extends Disposable implements ICoreExper
 
 		// Find which group this user falls into
 		for (const group of experimentConfig.groups) {
-			if (normalizedCohort >= group.min && normalizedCohort < group.max) {
+			if (normalizedCohort >= group.min && normalizedCohort <= group.max) {
 				return {
 					cohort,
 					subCohort: normalizedCohort,
